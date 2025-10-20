@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ИНТК кітапханасы</title>
+<style>
+  body {
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    color:#f1f5f9;
+    background:linear-gradient(180deg,#0f172a,#1e293b);
+    overflow-x:hidden;
+  }
+
+  .sky{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
+  .moon{position:absolute;top:60px;right:80px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#e0e0e0 60%,#bcbcbc);box-shadow:0 0 40px rgba(255,255,255,0.6);animation:float 6s ease-in-out infinite alternate;}
+  @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-20px);}}
+  .cloud{position:absolute;background:rgba(255,255,255,0.8);border-radius:50%;animation:moveCloud 60s linear infinite;}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:inherit;border-radius:inherit;}
+  .cloud.small{width:100px;height:60px;top:80px;left:-150px;}
+  .cloud.small::before{width:80px;height:50px;left:60px;top:-10px;}
+  .cloud.small::after{width:90px;height:55px;left:30px;top:10px;}
+  .cloud.big{width:180px;height:100px;top:150px;left:-300px;opacity:0.7;}
+  .cloud.big::before{width:150px;height:90px;left:80px;top:-20px;}
+  .cloud.big::after{width:120px;height:80px;left:60px;top:10px;}
+  @keyframes moveCloud{from{left:-300px;}to{left:110%;}}
+
+  .rain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,0.2) 0,rgba(255,255,255,0.2) 2px,transparent 2px,transparent 10px);background-size:2px 10px;animation:rainAnim 0.5s linear infinite;}
+  @keyframes rainAnim{0%{background-position:0 0;}100%{background-position:0 10px;}}
+
+  nav{display:flex;align-items:center;justify-content:space-between;background:rgba(30,58,138,0.95);backdrop-filter:blur(6px);padding:10px 20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
+  .logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+  .logo img{width:48px;height:48px;border-radius:50%;border:2px solid #93c5fd;box-shadow:0 0 12px rgba(147,197,253,0.7);}
+  .logo span{font-size:20px;font-weight:700;color:#fff;}
+  .menu a{color:#f1f5f9;text-decoration:none;margin-left:18px;font-weight:500;transition:color 0.2s;}
+  .menu a:hover{color:#93c5fd;}
+
+  .container{max-width:1100px;margin:auto;padding:18px;}
+  .section{background:rgba(255,255,255,0.1);border-radius:14px;margin-bottom:22px;box-shadow:0 4px 25px rgba(255,255,255,0.05);padding:16px;backdrop-filter:blur(10px);}
+  .section h2{color:#93c5fd;margin-bottom:10px;border-left:4px solid #60a5fa;padding-left:10px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;}
+  .book{background:rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:transform .25s,box-shadow .25s;}
+  .book:hover{transform:translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,0.5);}
+  .book img{width:100%;height:210px;object-fit:cover;filter:brightness(0.85);}
+  .book div{padding:10px;text-align:center;font-size:14px;color:#fff;}
+  .book a{display:inline-block;background:#3b82f6;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;margin-top:6px;font-size:13px;transition:background .2s;}
+  .book a:hover{background:#60a5fa;}
+
+  .intro{text-align:center;padding:60px 20px;}
+  .intro h1{color:#93c5fd;font-size:32px;margin-bottom:15px;}
+  .intro p{color:#e2e8f0;font-size:17px;max-width:800px;margin:auto;line-height:1.7;}
+  .intro button{background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:12px 28px;font-size:16px;cursor:pointer;margin-top:25px;transition:background .2s;}
+  .intro button:hover{background:#60a5fa;}
+
+  .pagination{text-align:center;margin:25px 0;}
+  .pagination button{background:#2563eb;color:#fff;border:none;border-radius:6px;padding:8px 16px;margin:0 4px;font-size:14px;transition:background .2s;}
+  .pagination button:hover{background:#3b82f6;}
+  .pagination button.active{background:#60a5fa;color:#0f172a;}
+
+  footer{text-align:center;color:#9ca3af;font-size:13px;margin:40px 0;}
+</style>
+</head>
+<body>
+
+<div class="sky">
+  <div class="moon"></div>
+  <div class="cloud small"></div>
+  <div class="cloud big"></div>
+  <div class="rain"></div>
+</div>
+
+<nav>
+  <div class="logo" id="homeLogo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfNoHsS59xpAyAvuAu0wDXP0x0TmBtnlYZ4w&s" alt="ИНТК логотипі">
+    <span>ИНТК кітапханасы</span>
+  </div>
+  <div class="menu">
+    <a href="#" id="menuHome">Басты бет</a>
+    <a href="#page1" id="menu1">Бет 1</a>
+    <a href="#page2" id="menu2">Бет 2</a>
+    <a href="#footer">Байланыс</a>
+  </div>
+</nav>
+
+<!-- ✅ Басты бет -->
+<div class="container" id="homePage">
+  <div class="intro">
+    <h1>ИНТК кітапханасына қош келдіңіз!</h1>
+    <p>
+      Бұл онлайн кітапхана — <strong>Инновациялық Технологиялық Колледж</strong> студенттеріне арналған цифрлық оқу платформасы.  
+      Мұнда сіз техникалық және гуманитарлық бағыттағы пәндер бойынша оқу құралдарын таба аласыз.
+    </p>
+    <button id="startReading">📚 Кітаптарды көру</button>
+  </div>
+</div>
+
+<div class="container" id="page1">
+  <div class="section">
+    <h2>Сандық техника</h2>
+    <div class="grid">
+      <div class="book"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROqtzjIf6pC0KHWh6DOO9OyGiR2H26l7CpPA&s"><div>Операционные системы<br><a href="https://www.pdfdrive.com/download.pdf?id=157494910" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYWXWmEYM7StU7CFIP20V4mFPRU77hIXIwDA&s"><div>Техникалық механика<br><a href="https://www.pdfdrive.com/download.pdf?id=188768002" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://lh6.googleusercontent.com/proxy/tC19OywnjVvg1Vw1BD2WDS52RPFjNa0RXj40vwIeSUK0DAYBhimg4F4Kj8cfBIFVgPkpRpbEaEYJRktxMCL8DpV7pM3xXR_3C3k4UQ"><div>Автоматика<br><a href="https://www.pdfdrive.com/download.pdf?id=194574081" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://cdn1.ozone.ru/s3/multimedia-g/6888553792.jpg" /><div>Техническое обслуживание и ремонт вычислительной техники<br><a href="https://www.ektu.kz/files/eor/EOR_Novak_OS/Data/Tema_3/%D0%92%D0%B8%D0%BB%D1%8C%D1%8F%D0%BC%D1%81%20-%20%D0%9C%D0%BE%D0%B4%D0%B5%D1%80%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D0%9F%D0%9A.%2016-%D0%B5%20%D0%B8%D0%B7%D0%B4.2006.pdf#:~:text=*%2016%20%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20*%2016%20%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://ormanbooks.kz/imgcreate.php?i=L3VwbG9hZC9pYmxvY2svZjUwL2Y1MGNlYTVlMmUyZDUzYTg0Y2QyZDBiZDEyNmI3YjAwLmpwZw=="><div>Устройство и ремонт персонального компьютера<br><a href="https://www.pdfdrive.com/download.pdf?id=158067254" target="_blank">Оқу</a></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ақпараттық қауіпсіздік</h2>
+    <div class="grid">
+      <div class="book"><img src="https://library.arsu.kz/wp-content/uploads/2021/09/32.32.32-1.jpg" /><div>Ақпараттық қауіпсіздікті басқару<br><a href="https://romangamma.ucoz.ru/_ld/0/5_____.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://lh5.googleusercontent.com/proxy/96GnZOOTn3rx82DfSi89GPSfi1_mLhmCypdcg4sBj7CwThnimzZI8IgUmA-_1TXd4sdpryCmumWFDo6jj3ByCNbvcGhnB_5muXDBNKMP3zpwwHId_ppbamK_kr_3ZQ"><div>Ақпараттық қауіпсіздік негіздері<br><a href="https://lib.tau-edu.kz/wp-content/uploads/2023/01/%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B9-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8-2.pdf" target="_blank">Оқу</a></div></div>
+      <!-- ✅ Түзетілген бөлік -->
+      <div class="book"><img src="https://cdn.litres.ru/pub/c/cover/6444478.jpg"><div>Безопасность веб-приложений<br><a href="https://www.pdfdrive.com/download.pdf?id=163840082" target="_blank">Оқу</a></div></div>
+      <!-- ✅ -->
+      <div class="book"><img src="https://library.arsu.kz/wp-content/uploads/2022/06/56.56.jpg"><div>Ақырлы құрылымдар мен ақпаратты кодтау<br><a href="https://www.pdfdrive.com/download.pdf?id=165293891" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://static.insales-cdn.com/images/products/1/2775/347622103/CAI_apparatnoe_obespechenie_gthsonalnogo_konpyutera_70_100_16_192c_10.jpg"><div>Аппаратное обеспечение персонального компьютера<br><a href="https://www.pdfdrive.com/download.pdf?id=170263888" target="_blank">Оқу</a></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page2" style="display:none;">
+  <div class="section">
+    <h2>Туризм</h2>
+    <div class="grid">
+      <div class="book"><img src="https://ndc.book24.ru/pim/products/images/51/13/018ed520-d8ff-7d6f-ba37-977886775113.jpg"><div>Иностранные термины в турбизнесе<br><a href="https://e-univers.ru/upload/iblock/f43/ml67djxr4v9iqj2p8q5d3l0abxj7c3nq.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMZ_96l7nHoZ1YS9gM3OXYVvJX-EV-nDYkDmK69_E5ERMzkON2"><div>ТУРИЗМНІҢ ЖАЛПЫ НЕГІЗДЕРІ<br><a href="https://kazast.edu.kz/wp-content/uploads/2023/09/58.%D0%94%D0%BE%D1%81%D0%BA%D0%B0%D1%80%D0%B0%D0%B5%D0%B2-%D0%91.%D0%9C.-%D0%A2%D1%83%D1%80%D0%B8%D0%B7%D0%BC%D0%BD%D1%96%D2%A3-%D0%B6%D0%B0%D0%BB%D0%BF%D1%8B-%D0%BD%D0%B5%D0%B3%D1%96%D0%B7%D0%B4%D0%B5%D1%80%D1%96-%D2%9A%D0%BE%D0%BD%D0%B0%D2%9B-%D2%AF%D0%B9-%D0%B6%D3%99%D0%BD%D0%B5-%D0%BC%D0%B5%D0%B9%D1%80%D0%B0%D0%BC%D1%85%D0%B0%D0%BD%D0%B0-%D1%96%D1%81%D1%96.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://finstat.ru/wp-content/uploads/2020/03/Zdorov_et.jpg"><div>ЭКОНОМИКА ТУРИЗМА
+<br><a href="https://tourlib.net/books_tourism/zdorov.htm" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSvLFmrmjIJD0qcz5fFoUGkhOFORJcLyiTk0q4NLfixquxerTEe"><div>ҚОНАҚ ҮЙ ЖӘНЕ
+ТУРИСТІК КЕШЕНДЕРДІ
+ЖОБАЛАУ НЕГІЗДЕРІ<br><a href="https://www.pdfdrive.com/download.pdf?id=186009227" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://online.anyflip.com/tpgd/aivg/files/mobile/1.jpg"><div>ГЕОГРАФИЯ ТУРИЗМА
+КАЗАХСТАНА<br><a href="https://lib.tau-edu.kz/wp-content/uploads/2021/12/1162470.pdf" target="_blank">Оқу</a></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Қонақ үй бизнесі</h2>
+    <div class="grid">
+      <div class="book"><img src="https://knigogid.ru/storage/images/books/7/13217/13217.jpg"><div>ПРИЕМ, РАЗМЕЩЕНИЕ
+И ВЫПИСКА ГОСТЕЙ<br><a href="https://pu10.edu.yar.ru/uchebniki/organizatsiya_deyatelnosti_sluzhbi_priema_i_razmeshcheniya.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://knigogid.ru/storage/images/books/2/6742/6742.jpg"><div>БРОНИРОВАНИЕ
+ГОСТИНИЧНЫХ УСЛУГ<br><a href="https://academia-moscow.ru/off-line/_books/fragment/101116521/101116521f.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://tramontana.ru/upload/iblock/35d/aqtkpkvu0pnlwfkimbo4l8gg0c2rwikg.png"><div>Рекреалогия: тренировочный процесс в активном туризме<br><a href="http://lib.dulaty.kz/rus2/all.doc/Elektron_res_ped/GanopolskiiV.Turizm.pdf#:~:text=%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%BE%2D%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%2C%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BD%D0%B0%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D1%83%20%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D1%8B%20%D0%BA,%D0%B8%20%D0%BD%D0%B5%D0%BF%D1%80%D0%B5%D1%80%D1%8B%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%2C%20%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%8B%D0%B2%D0%B0%D1%8E%D1%89%D0%B8%D0%B9%20%D0%B2%D1%81%D0%B5%20%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D1%8B%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B8" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://files.books.ru/pic/624001-625000/624686/624686.jpg"><div>ОРГАНИЗАЦИЯ ОБСЛУЖИВАНИЯ В ГОСТИНИЦАХ<br><a href="https://academia-moscow.ru/ftp_share/_books/fragments/fragment_16718.pdf" target="_blank">Оқу</a></div></div>
+      <div class="book"><img src="https://ir.ozone.ru/s3/multimedia-0/c1000/6428556960.jpg"><div>БУХГАЛТЕРСКИЙ УЧЕТ НА ПРЕДПРИЯТИЯХ ТУРИСТСКОЙ ИНДУСТРИИ<br><a href="https://academia-moscow.ru/ftp_share/_books/fragments/fragment_14919.pdf" target="_blank">Оқу</a></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="pagination">
+  <button id="btn1" class="active">1-бет</button>
+  <button id="btn2">2-бет</button>
+</div>
+
+<footer id="footer">©️ 2025 ИНТК кітапханасы 🌙</footer>
+
+<script>
+const homePage=document.getElementById("homePage");
+const p1=document.getElementById("page1");
+const p2=document.getElementById("page2");
+const btn1=document.getElementById("btn1");
+const btn2=document.getElementById("btn2");
+const startBtn=document.getElementById("startReading");
+const menuHome=document.getElementById("menuHome");
+const menu1=document.getElementById("menu1");
+const menu2=document.getElementById("menu2");
+const logo=document.getElementById("homeLogo");
+
+function showHome(){
+  homePage.style.display="block";
+  p1.style.display="none";
+  p2.style.display="none";
+  btn1.classList.remove("active");
+  btn2.classList.remove("active");
+  window.scrollTo(0,0);
+}
+function showPage1(){
+  homePage.style.display="none";
+  p1.style.display="block";
+  p2.style.display="none";
+  btn1.classList.add("active");
+  btn2.classList.remove("active");
+  window.scrollTo(0,0);
+}
+function showPage2(){
+  homePage.style.display="none";
+  p1.style.display="none";
+  p2.style.display="block";
+  btn2.classList.add("active");
+  btn1.classList.remove("active");
+  window.scrollTo(0,0);
+}
+
+menuHome.onclick=showHome;
+logo.onclick=showHome;
+startBtn.onclick=showPage1;
+btn1.onclick=showPage1;
+btn2.onclick=showPage2;
+menu1.onclick=showPage1;
+menu2.onclick=showPage2;
+</script>
+
+</body>
+</html>

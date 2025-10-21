@@ -7,68 +7,210 @@
 <style>
   body {
     margin:0;
-    font-family:"Poppins",sans-serif;
-    color:#f1f5f9;
-    background:linear-gradient(180deg,#0f172a,#1e293b);
+    font-family: "Cinzel Decorative", serif;
+    color:#f5e9c8;
+    background: radial-gradient(circle at top, #1b0e02 10%, #2a1a0a 50%, #0f0a04 100%);
     overflow-x:hidden;
   }
 
-  .sky{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1;}
-  .moon{position:absolute;top:60px;right:80px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#e0e0e0 60%,#bcbcbc);box-shadow:0 0 40px rgba(255,255,255,0.6);animation:float 6s ease-in-out infinite alternate;}
-  @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-20px);}}
-  .cloud{position:absolute;background:rgba(255,255,255,0.8);border-radius:50%;animation:moveCloud 60s linear infinite;}
-  .cloud::before,.cloud::after{content:"";position:absolute;background:inherit;border-radius:inherit;}
-  .cloud.small{width:100px;height:60px;top:80px;left:-150px;}
-  .cloud.small::before{width:80px;height:50px;left:60px;top:-10px;}
-  .cloud.small::after{width:90px;height:55px;left:30px;top:10px;}
-  .cloud.big{width:180px;height:100px;top:150px;left:-300px;opacity:0.7;}
-  .cloud.big::before{width:150px;height:90px;left:80px;top:-20px;}
-  .cloud.big::after{width:120px;height:80px;left:60px;top:10px;}
-  @keyframes moveCloud{from{left:-300px;}to{left:110%;}}
+  /* 🌙 Ортағасырлық фон */
+  .sky {
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    overflow:hidden; z-index:-1;
+  }
+  .sky::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url('https://i.ibb.co/mtSr2qC/medieval-pattern-gold.png') repeat;
+    opacity:0.08;
+  }
+  .moon {
+    position:absolute;
+    top:70px; right:100px;
+    width:120px; height:120px;
+    border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #ffeec7, #bca35b 70%, #806b2e);
+    box-shadow: 0 0 50px rgba(255,223,120,0.5);
+    animation: float 6s ease-in-out infinite alternate;
+  }
+  @keyframes float {0%{transform:translateY(0);}100%{transform:translateY(-25px);} }
 
-  .rain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,0.2) 0,rgba(255,255,255,0.2) 2px,transparent 2px,transparent 10px);background-size:2px 10px;animation:rainAnim 0.5s linear infinite;}
-  @keyframes rainAnim{0%{background-position:0 0;}100%{background-position:0 10px;}}
+  nav {
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(44,27,10,0.95);
+    border-bottom:2px solid #a87932;
+    padding:10px 25px;
+    position:sticky; top:0; z-index:10;
+    box-shadow:0 4px 15px rgba(0,0,0,0.7);
+  }
 
-  nav{display:flex;align-items:center;justify-content:space-between;background:rgba(30,58,138,0.95);backdrop-filter:blur(6px);padding:10px 20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
-  .logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
-  .logo img{width:48px;height:48px;border-radius:50%;border:2px solid #93c5fd;box-shadow:0 0 12px rgba(147,197,253,0.7);}
-  .logo span{font-size:20px;font-weight:700;color:#fff;}
-  .menu a{color:#f1f5f9;text-decoration:none;margin-left:18px;font-weight:500;transition:color 0.2s;}
-  .menu a:hover{color:#93c5fd;}
+  .logo {
+    display:flex; align-items:center; gap:12px; cursor:pointer;
+  }
+  .logo img {
+    width:56px; height:56px; border-radius:50%;
+    border:3px solid #d4af37;
+    box-shadow:0 0 15px rgba(212,175,55,0.7);
+  }
+  .logo span {
+    font-size:28px; font-weight:700;
+    color:#d4af37;
+    text-shadow:0 0 8px rgba(255,220,150,0.8);
+    letter-spacing:2px;
+  }
 
-  .container{max-width:1100px;margin:auto;padding:18px;}
-  .section{background:rgba(255,255,255,0.1);border-radius:14px;margin-bottom:22px;box-shadow:0 4px 25px rgba(255,255,255,0.05);padding:16px;backdrop-filter:blur(10px);}
-  .section h2{color:#93c5fd;margin-bottom:10px;border-left:4px solid #60a5fa;padding-left:10px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;}
-  .book{background:rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:transform .25s,box-shadow .25s;}
-  .book:hover{transform:translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,0.5);}
-  .book img{width:100%;height:210px;object-fit:cover;filter:brightness(0.85);}
-  .book div{padding:10px;text-align:center;font-size:14px;color:#fff;}
-  .book a{display:inline-block;background:#3b82f6;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;margin-top:6px;font-size:13px;transition:background .2s;}
-  .book a:hover{background:#60a5fa;}
+  .menu a {
+    color:#f5e9c8;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:500;
+    font-family:"Cormorant Garamond", serif;
+    font-size:17px;
+    transition:color .3s;
+  }
+  .menu a:hover {
+    color:#ffd966;
+    text-shadow:0 0 10px rgba(255,215,100,0.7);
+  }
 
-  .intro{text-align:center;padding:60px 20px;}
-  .intro h1{color:#93c5fd;font-size:32px;margin-bottom:15px;}
-  .intro p{color:#e2e8f0;font-size:17px;max-width:800px;margin:auto;line-height:1.7;}
-  .intro button{background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:12px 28px;font-size:16px;cursor:pointer;margin-top:25px;transition:background .2s;}
-  .intro button:hover{background:#60a5fa;}
+  .container {
+    max-width:1100px;
+    margin:auto;
+    padding:22px;
+  }
 
-  .pagination{text-align:center;margin:25px 0;}
-  .pagination button{background:#2563eb;color:#fff;border:none;border-radius:6px;padding:8px 16px;margin:0 4px;font-size:14px;transition:background .2s;}
-  .pagination button:hover{background:#3b82f6;}
-  .pagination button.active{background:#60a5fa;color:#0f172a;}
+  .section {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(214,184,110,0.4);
+    border-radius:12px;
+    margin-bottom:25px;
+    box-shadow:0 4px 25px rgba(0,0,0,0.5);
+    padding:18px;
+    backdrop-filter:blur(4px);
+  }
+  .section h2 {
+    color:#ffd966;
+    margin-bottom:12px;
+    border-left:4px solid #c8a24b;
+    padding-left:10px;
+    font-family:"Cinzel", serif;
+  }
 
-  footer{text-align:center;color:#9ca3af;font-size:13px;margin:40px 0;}
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:18px;
+  }
+
+  .book {
+    background:linear-gradient(145deg,#3a2a13,#1f1406);
+    border:1px solid #a87932;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.6);
+    transition:transform .25s, box-shadow .25s;
+  }
+  .book:hover {
+    transform:translateY(-8px);
+    box-shadow:0 10px 20px rgba(212,175,55,0.6);
+  }
+  .book img {
+    width:100%; height:210px; object-fit:cover;
+    filter:brightness(0.9);
+  }
+  .book div {
+    padding:10px; text-align:center;
+    font-size:14px; color:#f0e2b3;
+    font-family:"Cormorant Garamond", serif;
+  }
+  .book a {
+    display:inline-block;
+    background:linear-gradient(90deg,#a87932,#d4af37);
+    color:#1b0e02;
+    padding:6px 12px;
+    border-radius:6px;
+    text-decoration:none;
+    margin-top:6px;
+    font-size:13px;
+    font-weight:bold;
+    box-shadow:0 2px 5px rgba(0,0,0,0.4);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .book a:hover {
+    transform:scale(1.05);
+    box-shadow:0 4px 10px rgba(255,223,120,0.6);
+  }
+
+  .intro {
+    text-align:center;
+    padding:60px 20px;
+  }
+  .intro h1 {
+    color:#d4af37;
+    font-size:36px;
+    margin-bottom:20px;
+    font-family:"Cinzel Decorative", serif;
+    text-shadow:0 0 12px rgba(255,220,120,0.7);
+  }
+  .intro p {
+    color:#f2e4c4;
+    font-size:17px;
+    max-width:800px;
+    margin:auto;
+    line-height:1.7;
+    font-family:"Cormorant Garamond", serif;
+  }
+  .intro button {
+    background:linear-gradient(90deg,#a87932,#d4af37);
+    color:#1b0e02;
+    border:none;
+    border-radius:10px;
+    padding:14px 30px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:30px;
+    box-shadow:0 4px 12px rgba(212,175,55,0.5);
+    transition:transform .2s;
+  }
+  .intro button:hover {transform:scale(1.05);}
+
+  .pagination {
+    text-align:center;
+    margin:25px 0;
+  }
+  .pagination button {
+    background:linear-gradient(90deg,#5a3c18,#b3873a);
+    color:#f5e9c8;
+    border:none;
+    border-radius:6px;
+    padding:8px 16px;
+    margin:0 5px;
+    font-size:14px;
+    cursor:pointer;
+    transition:transform .2s;
+  }
+  .pagination button:hover {transform:scale(1.1);}
+  .pagination button.active {
+    background:linear-gradient(90deg,#d4af37,#f9e58b);
+    color:#1b0e02;
+    font-weight:bold;
+  }
+
+  footer {
+    text-align:center;
+    color:#c8a24b;
+    font-size:13px;
+    margin:40px 0;
+    font-family:"Cormorant Garamond", serif;
+  }
 </style>
 </head>
 <body>
 
-<div class="sky">
-  <div class="moon"></div>
-  <div class="cloud small"></div>
-  <div class="cloud big"></div>
-  <div class="rain"></div>
-</div>
+<div class="sky"><div class="moon"></div></div>
 
 <nav>
   <div class="logo" id="homeLogo">
@@ -83,15 +225,12 @@
   </div>
 </nav>
 
-<!-- ✅ Басты бет -->
 <div class="container" id="homePage">
   <div class="intro">
     <h1>ИНТК кітапханасына қош келдіңіз!</h1>
-    <p>
-      Бұл онлайн кітапхана — <strong>Инновациялық Технологиялық Колледж</strong> студенттеріне арналған цифрлық оқу платформасы.  
-      Мұнда сіз техникалық және гуманитарлық бағыттағы пәндер бойынша оқу құралдарын таба аласыз.
-    </p>
-    <button id="startReading">📚 Кітаптарды көру</button>
+    <p>Бұл онлайн кітапхана — <strong>Инновациялық Технологиялық Колледж</strong> студенттеріне арналған 
+    заманауи әрі рухани білім ордасы. Мұнда алтын дәуір мен болашақтың білімі тоғысқан 📚</p>
+    <button id="startReading">📜 Кітаптарды көру</button>
   </div>
 </div>
 
@@ -155,7 +294,7 @@
   <button id="btn2">2-бет</button>
 </div>
 
-<footer id="footer">©️ 2025 ИНТК кітапханасы 🌙</footer>
+<footer id="footer">©️ 2025 ИНТК кітапханасы ⚜️</footer>
 
 <script>
 const homePage=document.getElementById("homePage");
